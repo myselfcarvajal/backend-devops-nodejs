@@ -21,7 +21,7 @@ model Persona {
   Primer_apellido    String
   Segundo_apellido   String?
   Sexo               Sexo
-  Fecha_nacimiento   DateTime
+  Fecha_nacimiento   DateTime @db.Date
 
   @@map("personas")
 }
