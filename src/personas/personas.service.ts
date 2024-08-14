@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreatePersonaDto } from './dto/create-persona.dto';
 import { UpdatePersonaDto } from './dto/update-persona.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -20,21 +20,28 @@ export class PersonasService {
   }
 
   async findOne(id: string) {
-    return this.prisma.persona.findUnique({
+    const persona = await this.prisma.persona.findUnique({
       where: { Id: id },
     });
+
+    if (!persona) throw new HttpException('Persona Not Found', 404);
+
+    return persona;
   }
 
   async update(id: string, updatePersonaDto: UpdatePersonaDto) {
-    return await this.prisma.persona.update({
+    await this.findOne(id);
+
+    const updatedPersona = await this.prisma.persona.update({
       where: { Id: id },
       data: {
         ...updatePersonaDto,
       },
     });
+    return updatedPersona;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} persona`;
   }
 }
