@@ -46,8 +46,8 @@ export class PersonasService {
   async remove(id: string) {
     await this.findOne(id);
     const deleteUser = await this.prisma.persona.delete({
-        where: { Id: id },
-    })
+      where: { Id: id },
+    });
 
     return deleteUser;
   }
