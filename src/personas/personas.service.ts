@@ -49,6 +49,6 @@ export class PersonasService {
         where: { Id: id },
     })
 
-    return `This action removes a #${id} persona`;
+    return deleteUser;
   }
 }
