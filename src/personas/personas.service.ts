@@ -43,7 +43,12 @@ export class PersonasService {
     return updatedPersona;
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+    await this.findOne(id);
+    const deleteUser = await this.prisma.persona.delete({
+        where: { Id: id },
+    })
+
     return `This action removes a #${id} persona`;
   }
 }
