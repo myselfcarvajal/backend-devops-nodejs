@@ -26,10 +26,26 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+The application runs at http://localhost:3000/api/backend-nodejs. If you choose to run it manually, make sure the environment variable is set correctly:
+
+```bash
+DATABASE_URL="postgresql://postgres:password@localhost:5432/devops?schema=public"
+```
+
 ## Installation
 
 ```bash
 $ npm install
+```
+
+## Migrations
+
+```bash
+# Generate Prisma client (creates TypeScript types schemes)
+$ npx prisma generate
+
+# Run migration
+$ npx prisma migrate dev
 ```
 
 ## Running the app

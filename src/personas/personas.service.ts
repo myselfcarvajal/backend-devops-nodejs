@@ -11,7 +11,7 @@ export class PersonasService {
     return await this.prisma.persona.create({
       data: {
         ...createPersonaDto,
-        Fecha_nacimiento: new Date(createPersonaDto.Fecha_nacimiento),
+        fecha_nacimiento: new Date(createPersonaDto.fecha_nacimiento),
       },
     });
   }
@@ -22,7 +22,7 @@ export class PersonasService {
 
   async findOne(id: string) {
     const persona = await this.prisma.persona.findUnique({
-      where: { Id: id },
+      where: { id: id },
     });
 
     if (!persona) throw new HttpException('Persona Not Found', 404);
@@ -34,10 +34,10 @@ export class PersonasService {
     await this.findOne(id);
 
     const updatedPersona = await this.prisma.persona.update({
-      where: { Id: id },
+      where: { id: id },
       data: {
         ...updatePersonaDto,
-        Fecha_nacimiento: new Date(updatePersonaDto.Fecha_nacimiento),
+        fecha_nacimiento: new Date(updatePersonaDto.fecha_nacimiento),
       },
     });
     return updatedPersona;
@@ -46,7 +46,7 @@ export class PersonasService {
   async remove(id: string) {
     await this.findOne(id);
     const deleteUser = await this.prisma.persona.delete({
-      where: { Id: id },
+      where: { id: id },
     });
 
     return deleteUser;
